@@ -8,7 +8,6 @@ import '../../../Core/DB/database.dart';
 import '../../../Core/DB/db_key.dart';
 import '../../../Core/Widget/toast.dart';
 import '../../../Core/constant/apiconst.dart';
-import '../../Home/Navbar.dart';
 import '../Model/login_model.dart';
 
 class LoginProvider extends ChangeNotifier {

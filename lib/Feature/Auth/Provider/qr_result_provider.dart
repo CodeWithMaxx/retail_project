@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:retail_project/Core/Widget/toast.dart';
 import 'package:retail_project/Core/constant/apiconst.dart';
 import 'package:http/http.dart' as http;
 import 'package:retail_project/Feature/Auth/Model/qrresult_model.dart';
-import 'package:retail_project/Feature/Home/Navbar.dart';
 
 class QrResultProvider extends ChangeNotifier {
   String _message = "";

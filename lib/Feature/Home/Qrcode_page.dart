@@ -7,8 +7,6 @@ import 'package:retail_project/Core/Db/database.dart';
 import 'package:retail_project/Core/Db/db_key.dart';
 import 'package:retail_project/Core/Theme/color_pallets.dart';
 import 'package:retail_project/Feature/Auth/Provider/qr_result_provider.dart';
-import 'package:retail_project/Feature/Home/Homepage.dart';
-
 import '../Auth/Screen/BottamNavigation_screen.dart';
 
 class QRcode extends StatefulWidget {
