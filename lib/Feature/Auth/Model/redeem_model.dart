@@ -1,16 +1,16 @@
-class QrTransModel {
+class RedeemPointModel {
   final String message;
   final String status;
   final List<dynamic> data;
 
-  QrTransModel({
+  RedeemPointModel({
     required this.message,
     required this.status,
     required this.data,
   });
 
-  factory QrTransModel.fromJson(Map<String, dynamic> json) {
-    return QrTransModel(
+  factory RedeemPointModel.fromJson(Map<String, dynamic> json) {
+    return RedeemPointModel(
       message: json['message'],
       status: json['status'],
       data: json['data'] ?? [],

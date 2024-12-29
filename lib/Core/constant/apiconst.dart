@@ -34,16 +34,24 @@ class ApiURLs {
   -person_id
   -qr_text
   -point-added
-  -point_redeemed
+  -points_redeemed
 
   */
   static const String personPointReportApiUrl =
-      "http://retail.aadharindustries.in/person/person_point_report";
+      "http://retail.aadharindustries.in/person/person_points_report";
 
 /*
   params
   -factory_id
   -person_id
 
+  */
+  static const String personPointDetailApiUrl =
+      "http://retail.aadharindustries.in/person/person_points_details";
+
+  /*
+  params
+  -person_id
+  
   */
 }

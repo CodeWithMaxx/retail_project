@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:retail_project/Core/Db/database.dart';
-import 'package:retail_project/Core/Db/db_key.dart';
 import 'package:retail_project/Core/Theme/color_pallets.dart';
 import 'package:retail_project/Feature/Auth/Provider/qr_result_provider.dart';
 import '../Auth/Screen/BottamNavigation_screen.dart';
@@ -27,15 +27,15 @@ class _QRState extends State<QRcode> {
   @override
   void initState() {
     qrResultProvider = QrResultProvider();
-    qrData();
+
     super.initState();
   }
 
-  qrData() async {
-    String? personID =
-        await secureStorageService.getPersonID(key: DBKeys.personIDKey);
-    qrResultProvider.Qrresult(context, personID.toString(), result.toString());
-  }
+  // qrData() async {
+  //   if (result != null) {
+  //     qrResultProvider.Qrresult(context, result.toString());
+  //   }
+  // }
 
   String? response;
 
@@ -61,8 +61,8 @@ class _QRState extends State<QRcode> {
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => BottamNavigationbar()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const BottamNavigationbar()));
                 },
                 child: Container(
                   color: ColorPallets.primaryColor,
@@ -81,7 +81,8 @@ class _QRState extends State<QRcode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer(
+      backgroundColor: ColorPallets.secondaryColor,
+      body: Consumer<QrResultProvider>(
         builder: (_, ref, __) {
           return Column(
             children: <Widget>[
@@ -97,46 +98,51 @@ class _QRState extends State<QRcode> {
                         Text(
                             'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
                       else
-                        const Text('Scan a code'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  await _qrViewController?.toggleFlash();
-                                  setState(() {});
-                                },
-                                child: FutureBuilder(
-                                  future: _qrViewController?.getFlashStatus(),
-                                  builder: (context, snapshot) {
-                                    return Text('Flash: ${snapshot.data}');
-                                  },
-                                )),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  await _qrViewController?.flipCamera();
-                                  setState(() {});
-                                },
-                                child: FutureBuilder(
-                                  future: _qrViewController?.getCameraInfo(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.data != null) {
-                                      return Text(
-                                          'Camera facing ${describeEnum(snapshot.data!)}');
-                                    } else {
-                                      return const Text('loading');
-                                    }
-                                  },
-                                )),
-                          )
-                        ],
-                      ),
+                        Text('Scan QRcode',
+                            style: GoogleFonts.poppins(
+                                color: ColorPallets.primaryColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500)),
+
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: <Widget>[
+                      //     Container(
+                      //       margin: const EdgeInsets.all(8),
+                      //       child: ElevatedButton(
+                      //           onPressed: () async {
+                      //             await _qrViewController?.toggleFlash();
+                      //             setState(() {});
+                      //           },
+                      //           child: FutureBuilder(
+                      //             future: _qrViewController?.getFlashStatus(),
+                      //             builder: (context, snapshot) {
+                      //               return Text('Flash: ${snapshot.data}');
+                      //             },
+                      //           )),
+                      //     ),
+                      //     Container(
+                      //       margin: const EdgeInsets.all(8),
+                      //       child: ElevatedButton(
+                      //           onPressed: () async {
+                      //             await _qrViewController?.flipCamera();
+                      //             setState(() {});
+                      //           },
+                      //           child: FutureBuilder(
+                      //             future: _qrViewController?.getCameraInfo(),
+                      //             builder: (context, snapshot) {
+                      //               if (snapshot.data != null) {
+                      //                 return Text(
+                      //                     'Camera facing ${describeEnum(snapshot.data!)}');
+                      //               } else {
+                      //                 return const Text('loading');
+                      //               }
+                      //             },
+                      //           )),
+                      //     )
+                      //   ],
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,22 +152,36 @@ class _QRState extends State<QRcode> {
                             child: ElevatedButton(
                               onPressed: () async {
                                 // await _qrViewController?.pauseCamera();
+
                                 if (result != null) {
                                   response = result.toString();
+                                  ref.Qrresult(context, response!);
                                 }
                               },
-                              child: const Text('Next',
-                                  style: TextStyle(fontSize: 20)),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorPallets.primaryColor),
+                              child: Text('Next',
+                                  style: GoogleFonts.poppins(
+                                      color: ColorPallets.secondaryColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
                             ),
                           ),
                           Container(
                             margin: const EdgeInsets.all(8),
                             child: ElevatedButton(
-                              onPressed: () async {
-                                await _qrViewController?.resumeCamera();
+                              onPressed: () {
+                                setState(() {
+                                  result = null;
+                                });
                               },
-                              child: const Text('resume',
-                                  style: TextStyle(fontSize: 20)),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorPallets.primaryColor),
+                              child: Text('ReScan',
+                                  style: GoogleFonts.poppins(
+                                      color: ColorPallets.secondaryColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
                             ),
                           )
                         ],

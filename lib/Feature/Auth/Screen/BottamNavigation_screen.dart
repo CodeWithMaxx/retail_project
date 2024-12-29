@@ -19,9 +19,9 @@ class _BottamNavigationbarState extends State<BottamNavigationbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Bottam"),
-        ),
+        // appBar: AppBar(
+        //   title: const Text("Bottam"),
+        // ),
         body: pages[_Currentpage],
         bottomNavigationBar: CurvedNavigationBar(
           buttonBackgroundColor: Color.fromARGB(255, 109, 41, 50),
