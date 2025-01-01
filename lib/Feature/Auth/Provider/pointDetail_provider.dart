@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:retail_project/Core/Db/database.dart';
 import 'package:retail_project/Core/Db/db_key.dart';
 import 'package:retail_project/Feature/Auth/Model/point_detailmodel.dart';
-import 'package:retail_project/Feature/Home/TransReport.dart';
 import '../../../Core/Widget/toast.dart';
 import '../../../Core/constant/apiconst.dart';
 
