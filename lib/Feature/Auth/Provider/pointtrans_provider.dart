@@ -33,8 +33,8 @@ class PointtransProvider extends ChangeNotifier {
         Uri.parse(ApiURLs.personPointReportApiUrl),
         // Add headers if required (e.g., {"Content-Type": "application/json"})
         body: {
-          "person_id": personID,
-          "factory_id": factoryID,
+          "person_id": personID.toString(),
+          "factory_id": factoryID.toString(),
         },
       );
       if (response.statusCode == 200) {

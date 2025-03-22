@@ -70,8 +70,7 @@ class _PointRedeemPageState extends State<PointRedeemPage> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                ref.pointTransModel.data!.totPointsAdded
-                                    .toString(),
+                                ref.pointTransModel.data!.totPointsAdded!,
                                 style: GoogleFonts.poppins(
                                     color: ColorPallets.secondaryColor,
                                     fontSize: 11,
@@ -101,8 +100,7 @@ class _PointRedeemPageState extends State<PointRedeemPage> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  ref.pointTransModel.data!.totPointsRedeemed
-                                      .toString(),
+                                  ref.pointTransModel.data!.totPointsAdded!,
                                   style: GoogleFonts.poppins(
                                       color: ColorPallets.secondaryColor,
                                       fontSize: 11,
