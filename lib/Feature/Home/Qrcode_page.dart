@@ -7,6 +7,7 @@ import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:retail_project/Core/Db/database.dart';
 import 'package:retail_project/Core/Theme/color_pallets.dart';
 import 'package:retail_project/Feature/Auth/Provider/qr_result_provider.dart';
+import 'package:retail_project/Feature/Home/Navbar.dart';
 import '../Auth/Screen/BottamNavigation_screen.dart';
 
 class QRcode extends StatefulWidget {
@@ -34,9 +35,10 @@ class _QRState extends State<QRcode> {
   // qrData() async {
   //   if (result != null) {
   //     qrResultProvider.Qrresult(context, result.toString());
+  //     Navigator.pushReplacement(
+  //         context, MaterialPageRoute(builder: (_) => Navbar()));
   //   }
   // }
-
   String? response;
 
   @override
@@ -87,109 +89,38 @@ class _QRState extends State<QRcode> {
           return Column(
             children: <Widget>[
               Expanded(flex: 4, child: _buildQrView(context)),
-              Expanded(
-                flex: 1,
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      if (result != null)
-                        Text(
-                            'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                      else
-                        Text('Scan QRcode',
-                            style: GoogleFonts.poppins(
-                                color: ColorPallets.primaryColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500)),
-
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   children: <Widget>[
-                      //     Container(
-                      //       margin: const EdgeInsets.all(8),
-                      //       child: ElevatedButton(
-                      //           onPressed: () async {
-                      //             await _qrViewController?.toggleFlash();
-                      //             setState(() {});
-                      //           },
-                      //           child: FutureBuilder(
-                      //             future: _qrViewController?.getFlashStatus(),
-                      //             builder: (context, snapshot) {
-                      //               return Text('Flash: ${snapshot.data}');
-                      //             },
-                      //           )),
-                      //     ),
-                      //     Container(
-                      //       margin: const EdgeInsets.all(8),
-                      //       child: ElevatedButton(
-                      //           onPressed: () async {
-                      //             await _qrViewController?.flipCamera();
-                      //             setState(() {});
-                      //           },
-                      //           child: FutureBuilder(
-                      //             future: _qrViewController?.getCameraInfo(),
-                      //             builder: (context, snapshot) {
-                      //               if (snapshot.data != null) {
-                      //                 return Text(
-                      //                     'Camera facing ${describeEnum(snapshot.data!)}');
-                      //               } else {
-                      //                 return const Text('loading');
-                      //               }
-                      //             },
-                      //           )),
-                      //     )
-                      //   ],
-                      // ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                // await _qrViewController?.pauseCamera();
-
-                                if (result != null) {
-                                  response = result.toString();
-                                  ref.Qrresult(context, response!);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorPallets.primaryColor),
-                              child: Text('Next',
-                                  style: GoogleFonts.poppins(
-                                      color: ColorPallets.secondaryColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500)),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  result = null;
-                                });
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorPallets.primaryColor),
-                              child: Text('ReScan',
-                                  style: GoogleFonts.poppins(
-                                      color: ColorPallets.secondaryColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500)),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              // Expanded(
+              //   flex: 1,
+              //   child: FittedBox(
+              //     fit: BoxFit.contain,
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: <Widget>[
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           crossAxisAlignment: CrossAxisAlignment.center,
+              //           children: <Widget>[
+              //             Container(
+              //               margin: const EdgeInsets.all(8),
+              //               child: ElevatedButton(
+              //                 onPressed: () async {
+              //                   ref.Qrresult(context, result.toString());
+              //                 },
+              //                 style: ElevatedButton.styleFrom(
+              //                     backgroundColor: ColorPallets.primaryColor),
+              //                 child: Text('Next',
+              //                     style: GoogleFonts.poppins(
+              //                         color: ColorPallets.secondaryColor,
+              //                         fontSize: 15,
+              //                         fontWeight: FontWeight.w500)),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // )
             ],
           );
         },
@@ -225,7 +156,13 @@ class _QRState extends State<QRcode> {
       setState(() {
         result = scanData;
       });
+      qrResultProvider.Qrresult(context, result.toString());
+      controller.stopCamera();
     });
+    // if (result != null) {
+    //   qrResultProvider.Qrresult(context, result.toString()).then((route) =>
+    //       Navigator.push(context, MaterialPageRoute(builder: (_) => Navbar())));
+    // }
   }
 
   void _onPermissionSet(

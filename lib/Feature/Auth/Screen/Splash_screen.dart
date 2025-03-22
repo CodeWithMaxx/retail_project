@@ -25,9 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void wheretoGo() {
     Timer(Duration(seconds: 2), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      final logIN = preferences.getBool("loggedIN");
-      print(loggedIN);
-      if (logIN == true) {
+      
+      final logIN =  preferences.getBool("loggedIN") ?? false;
+      print(logIN);
+      if (logIN) {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -69,21 +70,25 @@ class _SplashScreenState extends State<SplashScreen> {
         ColorPallets.secondaryColor
       ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
       child: Center(
-        child: AnimatedTextKit(
-          animatedTexts: [
-            TypewriterAnimatedText(
-              "𝖠𝖺𝖽𝗁𝖺𝗋 𝖨𝗇𝖽𝗎𝗌𝗍𝗋𝗂𝖾𝗌",
-              textStyle: const TextStyle(
-                  fontSize: 25.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "asset/logo.png",
+              height: 200,
+              width: 200,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Aadhar Industries Pvt Ltd",
+              style: TextStyle(
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: ColorPallets.primaryColor),
-              speed: const Duration(milliseconds: 300),
-            ),
+            )
           ],
-          // totalRepeatCount: 2,
-          // pause: const Duration(milliseconds: 1000),
-          displayFullTextOnTap: true,
-          stopPauseOnTap: true,
         ),
       ),
     )));

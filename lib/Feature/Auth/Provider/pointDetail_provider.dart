@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:retail_project/Core/Db/database.dart';
@@ -14,7 +13,8 @@ class PointDetailProvider extends ChangeNotifier {
 
   String get message => _message;
   bool get isLoading => _isLoading;
-  PointsReport PointSummaryModel = PointsReport();
+  PointsReportmodel pointsReportmodel = PointsReportmodel();
+  // PointsReport pointsReport = PointsReport();
 
   final httpClient = http.Client();
 
@@ -26,6 +26,7 @@ class PointDetailProvider extends ChangeNotifier {
         await _secureStorageService.getPersonID(key: DBKeys.personIDKey);
     _isLoading = true;
     notifyListeners();
+    // final List<PointsReportmodel> pointReportList = [];
 
     try {
       final response = await http.post(
@@ -38,15 +39,18 @@ class PointDetailProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         var decoded = jsonDecode(response.body);
-        PointSummaryModel = PointsReport.fromJson(decoded);
+        PointsReportmodel pointsReportmodel =
+            PointsReportmodel.fromJson(decoded);
+        print(
+            'Point Data => ${pointsReportmodel.data!.first.particulars.toString()}');
         notifyListeners();
-        print(PointSummaryModel.message);
-        log(PointSummaryModel.message.toString());
+        //  print(pointsReportmodel.mess);
+        //log(PointsReport.message.toString());
         // Navigator.pushReplacement(
         //   context,
         //   MaterialPageRoute(builder: (_) => LoginPage()),
         // );
-        toastMsg(msgTxt: PointSummaryModel.message.toString());
+        toastMsg(msgTxt: pointsReportmodel.message.toString());
       } else {
         // Handle error response (e.g., display specific error message)
         print("Error: ${response.statusCode}");
@@ -58,5 +62,6 @@ class PointDetailProvider extends ChangeNotifier {
       print(e.toString());
       toastMsg(msgTxt: "An error occurred. Please try again later.");
     }
+    // return pointReportList;
   }
 }

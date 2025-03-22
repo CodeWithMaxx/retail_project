@@ -48,7 +48,12 @@ class LoginProvider extends ChangeNotifier {
       _secureStorageService.savePersonName(
           value: loginApiModel.data!.personName.toString(),
           key: DBKeys.personNameKey);
+      _sharedPreferences.setString(
+          loginApiModel.data!.personName.toString(), DBKeys.personNameKey);
       _sharedPreferences.setBool('loggedIN', true);
-    }
+    } // else {
+    //   toastMsg(msgTxt: "Please Enter the Correct Password.");
+    //   print("Error:${response.body}");
+    // }
   }
 }

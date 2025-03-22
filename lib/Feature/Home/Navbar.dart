@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:retail_project/Core/Theme/color_pallets.dart';
 import 'package:retail_project/Feature/Home/Point_redeem_page.dart';
 import 'Qrcode_page.dart';
 

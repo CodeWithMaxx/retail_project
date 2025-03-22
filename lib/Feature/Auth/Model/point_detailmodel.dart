@@ -1,61 +1,53 @@
-class PointsReport {
-  final List<Datum>? data;
-  final String? message;
-  final String? status;
+class PointsReportmodel {
+  List<Data>? data;
+  String? message;
+  String? status;
 
-  PointsReport({
-    this.data,
-    this.message,
-    this.status,
-  });
+  PointsReportmodel({this.data, this.message, this.status});
 
-  factory PointsReport.fromJson(Map<String, dynamic> json) {
-    return PointsReport(
-      data: (json['data'] as List<dynamic>?)
-          ?.map((item) => Datum.fromJson(item as Map<String, dynamic>))
-          .toList(),
-      message: json['message'] as String?,
-      status: json['status'] as String?,
-    );
+  PointsReportmodel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+    message = json['message'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'data': data?.map((item) => item.toJson()).toList(),
-      'message': message,
-      'status': status,
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['message'] = this.message;
+    data['status'] = this.status;
+    return data;
   }
 }
 
-class Datum {
-  final String? transDate;
-  final String? pointsAdded;
-  final int? pointsRedeemed;
-  final int? pointsBalance;
+class Data {
+  String? transDate;
+  String? particulars;
+  String? points;
+  int? pointsBalance;
 
-  Datum({
-    this.transDate,
-    this.pointsAdded,
-    this.pointsRedeemed,
-    this.pointsBalance,
-  });
+  Data({this.transDate, this.particulars, this.points, this.pointsBalance});
 
-  factory Datum.fromJson(Map<String, dynamic> json) {
-    return Datum(
-      transDate: json['trans_date'] as String?,
-      pointsAdded: json['points_added'] as String?,
-      pointsRedeemed: json['points_redeemed'] as int?,
-      pointsBalance: json['points_balance'] as int?,
-    );
+  Data.fromJson(Map<String, dynamic> json) {
+    transDate = json['trans_date'];
+    particulars = json['particulars'];
+    points = json['points'];
+    pointsBalance = json['points_balance'];
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'trans_date': transDate,
-      'points_added': pointsAdded,
-      'points_redeemed': pointsRedeemed,
-      'points_balance': pointsBalance,
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['trans_date'] = this.transDate;
+    data['particulars'] = this.particulars;
+    data['points'] = this.points;
+    data['points_balance'] = this.pointsBalance;
+    return data;
   }
 }

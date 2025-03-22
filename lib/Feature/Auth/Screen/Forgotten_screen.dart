@@ -4,7 +4,6 @@ import '../../../Core/Theme/color_pallets.dart';
 import '../../../Core/Widget/textfield.dart';
 import '../Provider/forgot_provider.dart';
 
-
 class Forgottenscreen extends StatefulWidget {
   const Forgottenscreen({super.key});
 
@@ -25,10 +24,12 @@ class _ForgottenscreenState extends State<Forgottenscreen> {
           child: Column(children: [
             Center(
               child: (CustomTextField(
-                  controller: mobileController,
-                  hintText: 'Mobile Number',
-                  iconData: Icons.phone,
-                  text: "Mobile")),
+                controller: mobileController,
+                hintText: 'Mobile Number',
+                iconData: Icons.phone,
+                text: "Mobile",
+                toHide: false,
+              )),
             ),
             const SizedBox(
               height: 30,

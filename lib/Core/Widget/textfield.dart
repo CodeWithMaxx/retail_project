@@ -5,29 +5,34 @@ class CustomTextField extends StatelessWidget {
   TextEditingController controller;
   String hintText;
   IconData iconData;
-
+  bool toHide;
   String text;
 
-  CustomTextField({
-    Key? key,
-    required this.controller,
-    required this.hintText,
-    required this.iconData,
-    required this.text,
-  }) : super(key: key);
+  CustomTextField(
+      {Key? key,
+      required this.controller,
+      required this.hintText,
+      required this.iconData,
+      required this.text,
+      required this.toHide})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: false,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(7),
-              borderSide: BorderSide(color: Color.fromARGB(250, 109, 41, 50))),
-          hintText: hintText,
-          prefixIcon: Icon(iconData),
-          label: Text(text)),
+    return Container(
+      height: 50,
+      width: 350,
+      // decoration: BoxDecoration(color: Colors.red.withOpacity(10)),
+      child: TextFormField(
+        controller: controller,
+        obscureText: toHide,
+        decoration: InputDecoration(
+            hintText: hintText,
+            prefixIcon: Icon(iconData),
+            label: Text(text),
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+      ),
     );
   }
 }

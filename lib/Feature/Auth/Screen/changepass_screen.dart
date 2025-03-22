@@ -27,73 +27,77 @@ class _ChangepasswordState extends State<Changepassword> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Change password',
-                        style: GoogleFonts.poppins(
-                            color: ColorPallets.textColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text(
-                        'Please set a new password',
-                        style: GoogleFonts.poppins(
-                            color: ColorPallets.textColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomTextField(
-                          controller: mobileController,
-                          hintText: "Mobile Number",
-                          iconData: Icons.phone,
-                          text: "Mobile"),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextField(
-                        controller: passwordController,
-                        hintText: 'Existing Password',
-                        text: 'Old Password',
-                        iconData: Icons.password,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextField(
-                        controller: expasswordController,
-                        hintText: 'Change Password',
-                        text: 'New Password',
-                        iconData: Icons.password,
-                      ),
-                      const SizedBox(height: 30),
-                      //      if (ChangeProvider.isLoadig)
-                      //CircularProgressIndicator()
-                      //else
-                      Consumer<ChangeProvider>(builder: (_, provider, __) {
-                        return ElevatedButton(
-                          onPressed: () {
-                            // final existingPassword = expasswordController.text;
-                            // final password = passwordController.text;
-                            // final mobileNumber = mobileController.text;
-                            provider.changePassword(
-                                context,
-                                expasswordController.text,
-                                mobileController.text,
-                                passwordController.text);
+                  Text(
+                    'Change password',
+                    style: GoogleFonts.poppins(
+                        color: ColorPallets.textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    'Please set a new password',
+                    style: GoogleFonts.poppins(
+                        color: ColorPallets.textColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextField(
+                    controller: mobileController,
+                    hintText: "Mobile Number",
+                    iconData: Icons.phone,
+                    text: "Mobile",
+                    toHide: false,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextField(
+                    controller: expasswordController,
+                    hintText: 'Existing Password',
+                    text: 'Old Password',
+                    iconData: Icons.password,
+                    toHide: true,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextField(
+                    controller: passwordController,
+                    hintText: 'Change Password',
+                    text: 'New Password',
+                    iconData: Icons.password,
+                    toHide: true,
+                  ),
+                  const SizedBox(height: 30),
+                  //      if (ChangeProvider.isLoadig)
+                  //CircularProgressIndicator()
+                  //else
+                  Consumer<ChangeProvider>(builder: (_, provider, __) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        // final existingPassword = expasswordController.text;
+                        // final password = passwordController.text;
+                        // final mobileNumber = mobileController.text;
+                        provider.changePassword(
+                            context,
+                            expasswordController.text,
+                            mobileController.text,
+                            passwordController.text);
 
-                            //        ChangeProvider.changePassword(existingPassword, password, mobileNumber);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorPallets.primaryColor),
-                          child: Text("Change Password",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                  color: Colors.white)),
-                        );
-                      })
-                    ]))));
+                        // ChangeProvider.changePassword(existingPassword, password, mobileNumber);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorPallets.primaryColor),
+                      child: Text("Change Password",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Colors.white)),
+                    );
+                  })
+                ]))));
   }
 }

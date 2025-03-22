@@ -54,4 +54,45 @@ class ApiURLs {
   -person_id
   
   */
+  static const String personRegisterApiurl =
+      "http://retail.aadharindustries.in/person/register";
+  /*
+      params
+      person_name
+      address
+      city
+      contact_no
+      mobile_no
+      email
+      Password
+      aadhar
+      pan_no
+      bank_name
+      bank_branch
+      bank_ac_no
+      ifsc
+      */
+  static const String userProfileApiurl =
+      "http://retail.aadharindustries.in/person/profile";
+  /*
+      params
+      person_id
+      */
+  static const String userProfileupdateApiurl =
+      "http://retail.aadharindustries.in/person/update";
+  /*
+      person_id
+      person_name
+      address
+      city
+      contact_no
+      mobile_no
+      email
+      aadhar
+      pan_no
+      bank_name
+      bank_branch
+      bank_ac_no
+      ifsc
+      */
 }

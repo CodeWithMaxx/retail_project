@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:retail_project/Core/Db/database.dart';
 import 'package:retail_project/Core/Db/db_key.dart';
@@ -7,6 +6,7 @@ import 'package:retail_project/Core/Widget/toast.dart';
 import 'package:retail_project/Core/constant/apiconst.dart';
 import 'package:http/http.dart' as http;
 import 'package:retail_project/Feature/Auth/Model/qrresult_model.dart';
+import 'package:retail_project/Feature/Auth/Screen/BottamNavigation_screen.dart';
 
 class QrResultProvider extends ChangeNotifier {
   final String _message = "";
@@ -37,6 +37,8 @@ class QrResultProvider extends ChangeNotifier {
         var decoded = jsonDecode(response.body);
         QrTransModel qrtransModel = QrTransModel.fromJson(decoded);
         toastMsg(msgTxt: qrtransModel.message.toString());
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => BottamNavigationbar()));
         notifyListeners();
         print(qrtransModel.message);
         //log(qrtransModel.message.toString());
