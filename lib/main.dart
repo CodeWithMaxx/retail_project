@@ -7,6 +7,7 @@ import 'package:retail_project/Feature/Auth/Provider/pointtrans_provider.dart';
 import 'package:retail_project/Feature/Auth/Provider/profile_provider.dart';
 import 'package:retail_project/Feature/Auth/Provider/qr_result_provider.dart';
 import 'package:retail_project/Feature/Auth/Provider/register_provider.dart';
+import 'package:retail_project/Feature/bloc/profile_bloc.dart';
 import 'package:retail_project/bloc/camichal_bloc.dart';
 import 'Feature/Auth/Provider/change_provider.dart';
 import 'Feature/Auth/Provider/forgot_provider.dart';
@@ -14,10 +15,10 @@ import 'Feature/Auth/Provider/login_provider.dart';
 import 'Feature/Auth/Screen/Splash_screen.dart';
 
 void main() {
-  runApp(BlocProvider(
-    create: (context) => CamichalBloc(),
-    child: const MyApp(),
-  ));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (context) => CamichalBloc()),
+    BlocProvider(create: (context) => ProfileBloc())
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

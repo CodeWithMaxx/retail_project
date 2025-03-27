@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:retail_project/Core/Db/database.dart';
 import 'package:retail_project/Core/Db/db_key.dart';
 import 'package:retail_project/Feature/Auth/Model/profile_model.dart';
-import 'package:retail_project/Feature/Auth/Screen/Profile_screen.dart';
 
 import '../../../Core/Widget/toast.dart';
 import '../../../Core/constant/apiconst.dart';
@@ -38,6 +38,7 @@ class ProfileProvider extends ChangeNotifier {
         var decoded = jsonDecode(response.body);
         userProfile = UserProfile.fromJson(decoded);
         print('Profile => ${userProfile.toString()}');
+        log('User Profile =>> ${userProfile.data!.aadhar}');
         notifyListeners();
         toastMsg(msgTxt: userProfile.message.toString());
       } else {

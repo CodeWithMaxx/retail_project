@@ -32,7 +32,7 @@ class Data {
   String? aadhar;
   String? panNo;
   String? bankName;
-  Null? bankBranch;
+  String? bankBranch;
   String? bankAcNo;
   String? ifsc;
 
